@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Teaching Bot</title>
+</head>
+<body>
+
+<h2>Gemini Teaching Bot</h2>
+
+<input id="q" placeholder="Ask a question" />
+<button onclick="ask()">Ask</button>
+
+<p id="ans"></p>
+
+<script>
+async function ask() {
+  const q = document.getElementById("q").value;
+
+  const res = await fetch("/api/teach", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ message: q })
+  });
+
+  const data = await res.json();
+  document.getElementById("ans").innerText = data.reply;
+}
+
+</script>
+</body>
+</html>
